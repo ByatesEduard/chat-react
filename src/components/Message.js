@@ -2,7 +2,7 @@ import React from 'react'
 
 const Message = () => {
   return (
-    <div>Message1</div>
+    <div>Message12</div>
   )
 }
 
