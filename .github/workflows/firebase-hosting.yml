@@ -11,13 +11,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      # Встановлюємо Node.js >= 20
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 22
 
+      # Встановлюємо залежності
       - run: npm ci
-      - run: npm run build   # збірка React → створює build/
 
+      # Збираємо фронт
+      - run: npm run build
+
+      # Деплой на Firebase
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
