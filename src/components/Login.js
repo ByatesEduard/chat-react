@@ -34,7 +34,7 @@ const Login = () => {
         >
           <Box p={5}>
             <Button onClick={login} variant="outlined">
-              Увійти з Google
+              Увійти з допомогою  Google
             </Button>
           </Box>
         </Grid>
