@@ -1,5 +1,6 @@
-name: Deploy to Firebase Hosting
+name: Deploy React App to Firebase Hosting
 
+# Запускати на пуш у гілку main
 on:
   push:
     branches:
@@ -8,24 +9,26 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+
     steps:
+      # 1. Забираємо код з репозиторію
       - uses: actions/checkout@v3
 
-      # Встановлюємо Node.js >= 20
+      # 2. Встановлюємо Node.js >= 22
       - uses: actions/setup-node@v3
         with:
           node-version: 22
 
-      # Встановлюємо залежності
+      # 3. Встановлюємо залежності
       - run: npm ci
 
-      # Збираємо фронт
+      # 4. Збираємо React (створює build/)
       - run: npm run build
 
-      # Деплой на Firebase
+      # 5. Деплой на Firebase Hosting
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-          channelId: live
+          channelId: live       # для live-деплою
           projectId: chatapp-b77bb
